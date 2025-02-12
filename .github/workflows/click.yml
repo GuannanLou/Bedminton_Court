@@ -1,0 +1,26 @@
+name: send card
+on:
+  watch:
+    types: [started]
+  workflow_dispatch:
+
+jobs:
+  send_message:
+    runs-on: ubuntu-latest
+    name: search court - started
+
+    steps:
+    - name: checkout
+      uses: actions/checkout@v3
+      with:
+        ref: master
+
+    - name: sender
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.11'
+        architecture: 'x64'
+    - run: pip install -r ./requirements.txt && python ./main.py
+
+    env:
+      BOT_API_KEY: ${{ secrets.BOT_API_KEY }}
