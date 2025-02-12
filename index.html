@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>场地查询系统</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        h1 {
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .output {
+            margin-top: 20px;
+            white-space: pre-wrap;
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        input {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>场地查询系统</h1>
+        <p>通过设置日期偏移量和时间阈值，查询 Sheffield 大学的羽毛球场地可用情况。</p>
+
+        <form id="queryForm">
+            <label for="dayOffset">日期偏移:</label>
+            <input type="number" id="dayOffset" name="dayOffset" value="0" />
+            <label for="timeThreshold">时间阈值:</label>
+            <input type="number" id="timeThreshold" name="timeThreshold" value="18" />
+            <button type="button" id="submitButton">查询场地</button>
+        </form>
+
+        <div class="output" id="output">
+            <!-- 查询结果将显示在这里 -->
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('submitButton').addEventListener('click', function() {
+            // 获取用户输入
+            const dayOffset = document.getElementById('dayOffset').value;
+            const timeThreshold = document.getElementById('timeThreshold').value;
+
+            // 构建请求 URL
+            const url = `/run_script?day_offset=${dayOffset}&threshold=${timeThreshold}`;
+
+            // 发起请求并显示结果
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('请求失败');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // 格式化输出结果
+                    document.getElementById('output').textContent = JSON.stringify(data, null, 2);
+                })
+                .catch(error => {
+                    document.getElementById('output').textContent = `请求失败: ${error.message}`;
+                });
+        });
+    </script>
+</body>
+</html>
