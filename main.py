@@ -5,7 +5,8 @@ import os
 
 if __name__ == '__main__':
     content = ""
-
+    content += "正在查询晚上7点之后的场次\n"
+    
     # 获取今天的日期
     today = datetime.today().date()
     # print("起始日期:", today)
@@ -25,8 +26,6 @@ if __name__ == '__main__':
     courts = courts.replace('false', 'False')
     courts = courts.replace('true', 'True')
     courts = eval(courts)
-
-    content += "正在查询晚上7点之后的场次\n"
 
     time_threshold = 19
     filted_courts = []
