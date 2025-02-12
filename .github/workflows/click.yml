@@ -20,7 +20,7 @@ jobs:
       with:
         python-version: '3.11'
         architecture: 'x64'
-    - run: python ./main.py
+    - run: pip install -r ./requirements.txt && python ./main.py
 
     env:
       BOT_API_KEY: ${{ secrets.BOT_API_KEY }}
