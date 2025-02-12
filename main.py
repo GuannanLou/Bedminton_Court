@@ -56,7 +56,7 @@ if __name__ == '__main__':
                 court['start'].split('T')[1], 
                 str(court['available'])
             )
-        content += '\n 来个HXD自觉一点定个场子'
+        content += '\n 黑奴自觉定场'
     else:
         content += '\n\n 这周也没有场子啊🅰\n'
         content += ' 叫我来干啥\n'
