@@ -13,7 +13,7 @@ if __name__ == '__main__':
     content += "起始日期: {}\n".format(today)
 
     # 计算七天后的日期
-    seven_days_later = today + timedelta(days=7)
+    seven_days_later = today + timedelta(days=6)
     # print("终止日期:", seven_days_later)
     content += "终止日期: {}\n".format(seven_days_later)
 
