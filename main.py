@@ -4,6 +4,7 @@ import json
 import hashlib
 import base64
 import os
+import random
 
 def get_img(img_path):
     with open(img_path, 'rb') as f:
@@ -69,7 +70,12 @@ def get_court_text(today):
                 court['start'].split('T')[1],
                 str(court['available'])
             )
-        content += '\n 黑奴自觉定场'
+        content += random.choice([
+            '\n 老黑自觉定场'，
+            '\n 顾顾自觉定场'，
+            '\n 学弟自觉定场'，
+            '\n 学姐自觉定场'，
+        ])
     else:
         content += '\n\n 这周也没有场子啊🅰\n'
         content += ' 叫我来干啥\n'
