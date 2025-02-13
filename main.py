@@ -41,7 +41,8 @@ if __name__ == '__main__':
 
     # image base64 and md5
     # image = 'https://github.com/GuannanLou/Bedminton_Court/res/profile.png'
-    image = 'https://raw.githubusercontent.com/GuannanLou/Bedminton_Court/refs/heads/master/res/profile.png'
+    # image = 'https://raw.githubusercontent.com/GuannanLou/Bedminton_Court/refs/heads/master/res/profile.png'
+    image = './res/profile.png'
     with open(image, 'rb') as f:
         im_bytes = f.read()
         im_b64 = str(base64.b64encode(im_bytes), "utf-8")
