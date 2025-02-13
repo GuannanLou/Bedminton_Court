@@ -47,7 +47,7 @@ def get_court(content, today):
     return content, filted_courts
 
 def get_court_text(today):
-    content, filted_courts = get_court(content, today)
+    content, filted_courts = get_court("", today)
     
     weekday_dict = ['Mon', 'Tue', 'Wen', 'Thu', 'Fri', 'Sat', 'Sun']
 
