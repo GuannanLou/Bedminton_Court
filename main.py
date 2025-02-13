@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta, date
 import requests
 import json
+import base64
 import os
 
 if __name__ == '__main__':
