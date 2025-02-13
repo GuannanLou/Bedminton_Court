@@ -51,7 +51,7 @@ if __name__ == '__main__':
     with open(image, 'rb') as f:
         im_fd = f.read()
         md = hashlib.md5()
-        md.update(im_b64)
+        md.update(im_fd)
         im_md5 = md.hexdigest()
 
     # print('\r查询结果:')
