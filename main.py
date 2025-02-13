@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta, date
 import requests
 import json
+import hashlib
 import base64
 import os
 
