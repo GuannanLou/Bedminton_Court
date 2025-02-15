@@ -52,20 +52,17 @@ def get_court_text(today):
     
     weekday_dict = ['Mon', 'Tue', 'Wen', 'Thu', 'Fri', 'Sat', 'Sun']
 
-    # print('\r查询结果:')
     content += "查询结果:"
     if len(filted_courts) > 0:
         current = None
         for court in filted_courts:
             if court['start'].split('T')[0] != current:
                 current = court['start'].split('T')[0]
-                # print('\n'+current, weekday_dict[date(int(current.split('-')[0]), int(current.split('-')[1]), int(current.split('-')[2])).weekday()])
                 content += "\n{} {}\n".format(
                     current,
                     weekday_dict[date(int(current.split('-')[0]), int(current.split('-')[1]),
                                       int(current.split('-')[2])).weekday()]
                 )
-                # print(' {}    available: {}'.format(court['start'].split('T')[1], str(court['available'])))
             content += ' {}    available: {}\n'.format(
                 court['start'].split('T')[1],
                 str(court['available'])
