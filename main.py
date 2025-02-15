@@ -44,11 +44,11 @@ def get_court(content, today):
     filted_courts = []
     for court in courts:
         filted = False
-        if int(court['start'].split('T')[1].split(':')[0]) < time_threshold: filted = True
-        if court['available'] == 0: filted = True
         current = court['start'].split('T')[0]
         weekday = weekday_dict[date(int(current.split('-')[0]), int(current.split('-')[1]), int(current.split('-')[2])).weekday()]
+        if int(court['start'].split('T')[1].split(':')[0]) < time_threshold: filted = True
         if weekday in ['Sat', 'Sun']: filted = False
+        if court['available'] == 0: filted = True
         if not filted:
             filted_courts.append(court)
     return content, filted_courts
