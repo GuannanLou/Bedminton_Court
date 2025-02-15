@@ -31,18 +31,24 @@ def get_court(content, today):
     link = 'https://api.sport.sheffield.ac.uk/api/site/HO/activitygroup/BAD/activity/BADTN/slots'
     # link = 'https://api.sport.sheffield.ac.uk/api/site/HO/activitygroup/GSC-MUGA/activity/GSC-SMUGA-TEN/slots'
     url = '{}?plus2Id=0&start={}T00%3A00%3A00.000Z&end={}T00%3A00%3A00.000Z&groupResources=true'.format(link, today, seven_days_later)
-
+    print(url)
+    
     courts = requests.get(url).text
     courts = courts.replace('false', 'False')
     courts = courts.replace('true', 'True')
     courts = eval(courts)
 
+    weekday_dict = ['Mon', 'Tue', 'Wen', 'Thu', 'Fri', 'Sat', 'Sun']
+    
     time_threshold = 19
     filted_courts = []
     for court in courts:
         filted = False
         if int(court['start'].split('T')[1].split(':')[0]) < time_threshold: filted = True
         if court['available'] == 0: filted = True
+        current = court['start'].split('T')[0]
+        weekday = weekday_dict[date(int(current.split('-')[0]), int(current.split('-')[1]), int(current.split('-')[2])).weekday()]
+        if weekday in ['Sat', 'Sun']: filted = False
         if not filted:
             filted_courts.append(court)
     return content, filted_courts
