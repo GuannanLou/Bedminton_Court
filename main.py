@@ -5,6 +5,7 @@ import hashlib
 import base64
 import os
 import random
+import time
 
 def get_img(img_path):
     with open(img_path, 'rb') as f:
@@ -126,6 +127,7 @@ if __name__ == '__main__':
         '学姐自觉定场',
     ])
 
+    time.sleep(1)
     send_text(url, stat_text)
 
     
