@@ -102,7 +102,7 @@ def get_court_text(today):
     
     content += '\n'
     content += stat_text
-    return content, state
+    return content
 
 def send_text(url, content):
     msg = {"msgtype": "text", "text": {"content": content}}
@@ -122,7 +122,7 @@ if __name__ == '__main__':
     url = "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key={}".format(bot_key.replace('_', '-'))
 
     today = datetime.today().date()
-    state, content = get_court_text(today)
+    content = get_court_text(today)
 
     image = './res/profile.png'
 
