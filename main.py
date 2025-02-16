@@ -120,10 +120,10 @@ if __name__ == '__main__':
     send_img(url, image)
 
     stat_text = '没场，不用订' if not state else random.choice([
-        '\n 老黑自觉定场',
-        '\n 顾顾自觉定场',
-        '\n 学弟自觉定场',
-        '\n 学姐自觉定场',
+        '老黑自觉定场',
+        '顾顾自觉定场',
+        '学弟自觉定场',
+        '学姐自觉定场',
     ])
 
     send_text(url, stat_text)
