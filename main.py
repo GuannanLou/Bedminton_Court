@@ -20,7 +20,7 @@ def get_img(img_path):
 
 def get_court(content, today):
     content = ""
-    content += "正在查询晚上7点之后的场次\n"
+    content += "\n正在查询晚上7点之后的场次\n"
 
     # 获取今天的日期
     content += "起始日期: {}\n".format(today)
@@ -102,11 +102,11 @@ def get_court_text(today):
     
     content += '\n'
     content += stat_text
-
-    content = stat_text+content+'\n\n'
-    
+  
     content += '\n警世格言：\n'
     content += custom_api_res
+
+    content = stat_text+content+'\n'
     
     return content
 
