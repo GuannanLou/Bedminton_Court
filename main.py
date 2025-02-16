@@ -66,6 +66,8 @@ def get_court_text(today):
 
     custom_api_res = custom_api()
 
+    state = False
+    
     content += "查询结果:"
     if len(filted_courts) > 0:
         current = None
@@ -81,20 +83,16 @@ def get_court_text(today):
                 court['start'].split('T')[1],
                 str(court['available'])
             )
-        content += random.choice([
-            '\n 老黑自觉定场',
-            '\n 顾顾自觉定场',
-            '\n 学弟自觉定场',
-            '\n 学姐自觉定场',
-        ])
+        state = True
     else:
         content += '\n\n 这周也没有场子啊🅰\n'
         content += ' 叫我来干啥\n'
         content += ' hei不如去攀岩\n'
         content += '\n'
         content += custom_api_res
+        state = False
 
-    return content
+    return content, state
 
 def send_text(url, content):
     msg = {"msgtype": "text", "text": {"content": content}}
@@ -114,9 +112,20 @@ if __name__ == '__main__':
     url = "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key={}".format(bot_key.replace('_', '-'))
 
     today = datetime.today().date()
-    content = get_court_text(today)
+    state, content = get_court_text(today)
 
     image = './res/profile.png'
 
     send_text(url, content)
     send_img(url, image)
+
+    stat_text = '没场，不用订' if not state else: random.choice([
+        '\n 老黑自觉定场',
+        '\n 顾顾自觉定场',
+        '\n 学弟自觉定场',
+        '\n 学姐自觉定场',
+    ])
+
+    send_text(url, stat_text)
+
+    
