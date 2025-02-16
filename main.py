@@ -93,6 +93,15 @@ def get_court_text(today):
         content += custom_api_res
         state = False
 
+    stat_text = '没场，不用订' if not state else random.choice([
+        '老黑自觉定场',
+        '顾顾自觉定场',
+        '学弟自觉定场',
+        '学姐自觉定场',
+    ])
+    
+    content += '\n'
+    content += stat_text
     return content, state
 
 def send_text(url, content):
@@ -117,17 +126,5 @@ if __name__ == '__main__':
 
     image = './res/profile.png'
 
-    send_text(url, content)
     send_img(url, image)
-
-    stat_text = '没场，不用订' if not state else random.choice([
-        '老黑自觉定场',
-        '顾顾自觉定场',
-        '学弟自觉定场',
-        '学姐自觉定场',
-    ])
-
-    time.sleep(1)
-    send_text(url, stat_text)
-
-    
+    send_text(url, content)
