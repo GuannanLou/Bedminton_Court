@@ -53,10 +53,18 @@ def get_court(content, today):
             filted_courts.append(court)
     return content, filted_courts
 
+def custom_api():
+    url_dog = "https://api.oick.cn/api/dog"
+    res = requests.get(url_dog)
+    return json.loads(res.text)
+
+
 def get_court_text(today):
     content, filted_courts = get_court("", today)
     
     weekday_dict = ['Mon', 'Tue', 'Wen', 'Thu', 'Fri', 'Sat', 'Sun']
+
+    custom_api_res = custom_api()
 
     content += "查询结果:"
     if len(filted_courts) > 0:
@@ -82,7 +90,9 @@ def get_court_text(today):
     else:
         content += '\n\n 这周也没有场子啊🅰\n'
         content += ' 叫我来干啥\n'
-        content += ' hei不如去攀岩'
+        content += ' hei不如去攀岩\n'
+        content += '\n'
+        content += custom_api_res
 
     return content
 
