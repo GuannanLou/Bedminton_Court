@@ -90,7 +90,7 @@ def get_court_text(today):
         content += ' 叫我来干啥\n'
         content += ' hei不如去攀岩\n'
         content += '\n'
-        content += custom_api_res
+        
         state = False
 
     stat_text = '没场，不用订' if not state else random.choice([
@@ -102,6 +102,12 @@ def get_court_text(today):
     
     content += '\n'
     content += stat_text
+
+    content = stat_text+content+'\n\n'
+    
+    content += '\n警世格言：\n'
+    content += custom_api_res
+    
     return content
 
 def send_text(url, content):
