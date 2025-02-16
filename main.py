@@ -20,7 +20,7 @@ def get_img(img_path):
 
 def get_court(content, today):
     content = ""
-    content += "\n正在查询晚上7点之后的场次\n"
+    content += "\n\n正在查询晚上7点之后的场次\n"
 
     # 获取今天的日期
     content += "起始日期: {}\n".format(today)
@@ -69,7 +69,7 @@ def get_court_text(today):
 
     state = False
     
-    content += "查询结果:"
+    content += "查询结果:\n"
     if len(filted_courts) > 0:
         current = None
         for court in filted_courts:
@@ -86,9 +86,9 @@ def get_court_text(today):
             )
         state = True
     else:
-        content += '\n\n 这周也没有场子啊🅰\n'
+        content += '\n 这周也没有场子啊🅰\n'
         content += ' 叫我来干啥\n'
-        content += ' hei不如去攀岩\n'
+        content += ' hei不如去攀岩'
         content += '\n'
         
         state = False
@@ -103,7 +103,7 @@ def get_court_text(today):
     content += '\n'
     content += stat_text
   
-    content += '\n警世格言：\n'
+    content += '\n\n警世格言：\n'
     content += custom_api_res
 
     content = stat_text+content+'\n'
