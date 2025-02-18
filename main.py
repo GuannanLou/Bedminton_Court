@@ -203,7 +203,7 @@ def send_card(url):
             }
         }
     }
-    res_text = requests.post(url=url, msgtype='template_card', template_card=json.dumps(msg))
+    res_text = requests.post(url=url, data=json.dumps(msg))
     return res_text
 
 if __name__ == '__main__':
