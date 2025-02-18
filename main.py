@@ -217,4 +217,4 @@ if __name__ == '__main__':
 
     send_img(url, image)
     send_text(url, content)
-    send_card(url)
+    # send_card(url)
