@@ -7,6 +7,7 @@ import os
 import random
 import time
 
+
 def get_img(img_path):
     with open(img_path, 'rb') as f:
         im_bytes = f.read()
@@ -17,6 +18,7 @@ def get_img(img_path):
         md.update(im_fd)
         im_md5 = md.hexdigest()
     return im_b64, im_md5
+
 
 def get_court(content, today):
     content = ""
@@ -31,28 +33,31 @@ def get_court(content, today):
 
     link = 'https://api.sport.sheffield.ac.uk/api/site/HO/activitygroup/BAD/activity/BADTN/slots'
     # link = 'https://api.sport.sheffield.ac.uk/api/site/HO/activitygroup/GSC-MUGA/activity/GSC-SMUGA-TEN/slots'
-    url = '{}?plus2Id=0&start={}T00%3A00%3A00.000Z&end={}T00%3A00%3A00.000Z&groupResources=true'.format(link, today, seven_days_later)
+    url = '{}?plus2Id=0&start={}T00%3A00%3A00.000Z&end={}T00%3A00%3A00.000Z&groupResources=true'.format(link, today,
+                                                                                                        seven_days_later)
     print(url)
-    
+
     courts = requests.get(url).text
     courts = courts.replace('false', 'False')
     courts = courts.replace('true', 'True')
     courts = eval(courts)
 
     weekday_dict = ['Mon', 'Tue', 'Wen', 'Thu', 'Fri', 'Sat', 'Sun']
-    
+
     time_threshold = 19
     filted_courts = []
     for court in courts:
         filted = False
         current = court['start'].split('T')[0]
-        weekday = weekday_dict[date(int(current.split('-')[0]), int(current.split('-')[1]), int(current.split('-')[2])).weekday()]
+        weekday = weekday_dict[
+            date(int(current.split('-')[0]), int(current.split('-')[1]), int(current.split('-')[2])).weekday()]
         if int(court['start'].split('T')[1].split(':')[0]) < time_threshold: filted = True
         if weekday in ['Sat', 'Sun']: filted = False
         if court['available'] == 0: filted = True
         if not filted:
             filted_courts.append(court)
     return content, filted_courts
+
 
 def custom_api():
     url_dog = "https://api.oick.cn/api/dog"
@@ -62,13 +67,13 @@ def custom_api():
 
 def get_court_text(today):
     content, filted_courts = get_court("", today)
-    
+
     weekday_dict = ['Mon', 'Tue', 'Wen', 'Thu', 'Fri', 'Sat', 'Sun']
 
     custom_api_res = custom_api()
 
     state = False
-    
+
     content += "查询结果:\n"
     if len(filted_courts) > 0:
         current = None
@@ -90,7 +95,7 @@ def get_court_text(today):
         content += ' 叫我来干啥\n'
         content += ' hei不如去攀岩'
         content += '\n'
-        
+
         state = False
 
     stat_text = '没场，不用订' if not state else random.choice([
@@ -99,29 +104,38 @@ def get_court_text(today):
         '学弟自觉定场',
         '学姐自觉定场',
     ])
-    
+
     content += '\n'
     content += stat_text
-  
+
     content += '\n\n警世格言：\n'
     content += custom_api_res
 
-    content = stat_text+content+'\n'
-    
+    content = stat_text + content + '\n'
+
     return content
 
+
 def send_text(url, content):
-    msg = {"msgtype": "text", "text": {"content": content}}
+    msg = {
+        "msgtype": "text",
+        "text": {
+            "content": content,
+            "mentioned_list": ["lilikili4050"]
+        }
+    }
     res_text = requests.post(url=url, data=json.dumps(msg))
     return res_text
 
+
 def send_img(url, image):
     im_b64, im_md5 = get_img(image)
-    
+
     headers = {"content-type": "application/json"}
     msg = {"msgtype": "image", "image": {"base64": im_b64, "md5": im_md5}}
     res_image = requests.post(url=url, headers=headers, json=msg)
     return res_image
+
 
 if __name__ == '__main__':
     bot_key = os.getenv("BOT_API_KEY")
