@@ -121,8 +121,8 @@ def send_text(url, content):
         "msgtype": "text",
         "text": {
             "content": content,
-            "mentioned_list": ["lilikili4050"],
-            "mentioned_mobile_list": ["15070919071"]
+            # "mentioned_list": ["lilikili4050"],
+            # "mentioned_mobile_list": ["15070919071"]
         }
     }
     res_text = requests.post(url=url, data=json.dumps(msg))
