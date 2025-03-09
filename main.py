@@ -23,7 +23,6 @@ def get_img(img_path):
 def get_court(today):
     # content = ""
     # content += "\n\n正在查询晚上7点之后的场次\n"
-
     content = {}
 
     # 获取今天的日期
