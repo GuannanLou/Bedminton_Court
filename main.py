@@ -97,7 +97,7 @@ def get_court_text(today):
     ])
     content += '\n'
     content += stat_text
-    content += '\n\n警世格言：\n'
+    # content += '\n\n警世格言：\n'
     # content += custom_api_res
     content = stat_text + content + '\n'
     return content
