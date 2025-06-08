@@ -55,16 +55,16 @@ def get_court(content, today):
     return content, filtered_courts
 
 
-def custom_api():
-    url_dog = "https://api.oick.cn/api/dog"
-    res = requests.get(url_dog)
-    return json.loads(res.text)
+# def custom_api():
+#     url_dog = "https://api.oick.cn/api/dog"
+#     res = requests.get(url_dog)
+#     return json.loads(res.text)
 
 
 def get_court_text(today):
     content, filtered_courts = get_court("", today)
     weekday_dict = ['Mon', 'Tue', 'Wen', 'Thu', 'Fri', 'Sat', 'Sun']
-    custom_api_res = custom_api()
+    # custom_api_res = custom_api()
 
     content += "查询结果:\n"
     if len(filtered_courts) > 0:
@@ -98,7 +98,7 @@ def get_court_text(today):
     content += '\n'
     content += stat_text
     content += '\n\n警世格言：\n'
-    content += custom_api_res
+    # content += custom_api_res
     content = stat_text + content + '\n'
     return content
 
